@@ -19,8 +19,8 @@ const FormLogin = () => {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<AuthCredentials>({
-    email: 'us.10@hotmail.com',
-    password: '198022',
+    email: '',
+    password: '',
   });
 
   const [alert, setAlert] = useState<AlertContent>({
