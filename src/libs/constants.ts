@@ -10,3 +10,6 @@ export const JWT_COOKIE_KEY: string = 'authed_user_token'
 export const APP_CLEAN_ALERTS_TIMEOUT: number = 5000
 
 export const APP_NEW_USER_MESSAGE = 'Conta criada com sucesso :)'
+
+export const INITIAL_PERCENTAGE_TO_HIDE: number = 8
+export const FINAL_PERCENTAGE_TO_HIDE: number = 1.2
