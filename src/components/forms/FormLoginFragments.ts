@@ -3,6 +3,7 @@ export const emailInputLogin = {
   id: 'email',
   name: 'email',
   title: 'email',
+  defaultValue: 'us.10@hotmail.com'
 }
 
 export const passwordInputLogin = {
@@ -10,6 +11,7 @@ export const passwordInputLogin = {
   id: 'password',
   name: 'password',
   title: 'senha',
+  defaultValue: '198022'
 }
 
 export const buttonLogin = {

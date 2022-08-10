@@ -6,13 +6,12 @@ import { useNavigate } from 'react-router-dom';
 const NavButtons = (): ReactElement => {
   const auth = useAuth();
   const navigate = useNavigate();
-  const initialValue = !!auth.token;
   const logout = () => {
     auth.signOut();
-    navigate('/');
+    navigate('/entrar');
   };
 
-  function reducerSession(state: string, action: { type: number }) {
+  const handleSessionButtons = (): ReactElement => {
     let buttons: { [x: number]: JSX.Element } = {
       0: (
         <>
@@ -29,16 +28,9 @@ const NavButtons = (): ReactElement => {
         </>
       ),
     };
-    return buttons[action.type] ?? state;
-  }
-
-  const [state, dispatch] = useReducer(reducerSession, initialValue);
-
-  useEffect(() => {
-    dispatch({ type: !!auth.token ? 1 : 0 });
-  }, [auth.token]);
-
-  return state;
+    return buttons[auth.token ? 1 : 0];
+  };
+  return handleSessionButtons();
 };
 
 export default NavButtons;

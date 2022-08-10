@@ -19,8 +19,8 @@ const FormLogin = () => {
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState<AuthCredentials>({
-    email: '',
-    password: '',
+    email: 'us.10@hotmail.com',
+    password: '198022',
   });
 
   const [alert, setAlert] = useState<AlertContent>({
@@ -31,7 +31,7 @@ const FormLogin = () => {
   const submitLogin = async (): Promise<void> => {
     try {
       await auth.signIn(credentials);
-      navigate('/painel');
+      navigate('/');
     } catch ({ response: { status, data } }: any) {
       setAlert({ status, message: data.validation.body.message });
     } finally {

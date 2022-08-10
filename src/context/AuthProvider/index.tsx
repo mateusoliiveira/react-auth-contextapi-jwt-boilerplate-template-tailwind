@@ -4,43 +4,41 @@ import { Session } from '../../interfaces/Session';
 import { ApiServer } from '../../libs/services';
 import { IAuthProvider, IAuthContext } from './types';
 import {
-  removeSessionCookie,
-  getSessionCookie,
-  setSessionCookie,
   emptySession,
+  expireSessionAndGrant,
+  getSession,
+  setSessionAndGrant,
 } from './utils';
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
-
 export const AuthProvider = ({ children }: IAuthProvider) => {
-  const [session, setSession] = useState<Session>(emptySession());
-
+  const [sessionContext, setSessionContext] = useState<Session>(emptySession());
   useEffect(() => {
-    const session = getSessionCookie();
-    if (session) {
-      setSession(session);
+    const activeSession = getSession();
+    if (activeSession) {
+      setSessionContext(activeSession);
     }
   }, []);
 
   async function signIn(credentials: AuthCredentials): Promise<void> {
     try {
       const { data } = await ApiServer.post('/sessions', credentials);
-      setSession({ ...data.user, token: data.token });
-      setSessionCookie({ ...data.user, token: data.token });
+      setSessionAndGrant({ ...data.user, token: data.token });
+      setSessionContext({ ...data.user, token: data.token });
     } catch (error: any) {
       throw error;
     }
   }
 
-  function signOut() {
-    removeSessionCookie();
-    setSession(emptySession());
+  async function signOut(): Promise<void> {
+    setSessionContext(emptySession());
+    expireSessionAndGrant();
   }
 
   return (
     <AuthContext.Provider
       value={{
-        ...session,
+        ...sessionContext,
         signIn,
         signOut,
       }}
