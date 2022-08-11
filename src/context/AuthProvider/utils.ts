@@ -4,7 +4,7 @@ import { JWT_SECRET_KEY } from '../../libs/constants'
 import { Session } from "../../interfaces/Session";
 import Cookies from 'js-cookie'
 
-export function emptySession() {
+export function emptySession(): Session {
   return {
     id: '',
     name: '',

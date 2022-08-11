@@ -1,32 +1,27 @@
-import { ReactElement, useEffect, useReducer } from 'react';
+import { ReactElement, useEffect, useState } from 'react';
 import { AlertContent } from '../../../interfaces/AlertContent';
-
-function reducerColor(state: string, action: any) {
-  let availableColors: { [x: string]: string } = {
-    '2': 'green',
-    '4': 'red',
-  };
-  return availableColors[action.type] ?? state;
-}
+import {
+  AppAlertsFail,
+  AppAlertsOut,
+  AppAlertsSuccess,
+} from '../inert/AppAlerts';
 
 const Alert = ({ status, message }: AlertContent): ReactElement => {
-  const [state, dispatch] = useReducer(reducerColor, 'red');
+  const [alertType, setAlertType] = useState<string>('');
+
+  const handleAlerts = (): ReactElement => {
+    let buttons: { [x: string]: JSX.Element } = {
+      '2': <AppAlertsSuccess message={message} />,
+      '4': <AppAlertsFail message={message} />,
+    };
+    return buttons[alertType] ?? <AppAlertsOut message={message} />;
+  };
 
   useEffect(() => {
-    dispatch({ type: status.toString().charAt(0) });
+    setAlertType(status.toString().charAt(0));
   }, [status, message]);
 
-  return !!status ? (
-    <div
-      className={`my-3 bg-${state}-100 border-l-4 border-${state}-500 text-${state}-700 p-4`}
-      role="alert"
-    >
-      <p className="font-bold">Mensagem</p>
-      <p>{message}</p>
-    </div>
-  ) : (
-    <></>
-  );
+  return status ? handleAlerts() : <></>;
 };
 
 export default Alert;

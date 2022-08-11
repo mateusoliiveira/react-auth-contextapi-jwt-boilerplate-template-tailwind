@@ -8,14 +8,14 @@ const AppNav = (): ReactElement => {
   return (
     <header className="text-gray-600 body-font">
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-        <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
+        <div className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
           <div>
             <img src={LogoImage} alt="Logo ERP" className="w-10" />
           </div>
           <AppLink to={'/'}>
             <span className="ml-3 text-xl">{APP_TITLE}</span>
           </AppLink>
-        </a>
+        </div>
         <nav className="md:ml-auto flex flex-wrap gap-5 items-center text-base justify-center">
           <NavButtons />
         </nav>

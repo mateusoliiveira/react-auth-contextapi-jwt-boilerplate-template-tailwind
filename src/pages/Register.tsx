@@ -7,7 +7,7 @@ const Register = () => {
     <AppContainer>
       <AppLayout
         title={'Você está a um passo 😉'}
-        description={'crie já sua conta de colaborador'}
+        description={'crie já sua conta'}
       >
         <RegisterSection />
       </AppLayout>

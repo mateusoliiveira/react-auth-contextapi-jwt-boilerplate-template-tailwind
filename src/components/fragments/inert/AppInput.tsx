@@ -1,9 +1,4 @@
-import {
-  InputHTMLAttributes,
-  ReactElement,
-  RefAttributes,
-  useRef,
-} from 'react';
+import { InputHTMLAttributes, ReactElement } from 'react';
 
 const AppInput = ({
   placeholder,

@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 const AppLink = ({ to, children }: LinkProps): ReactElement => {
   return (
-    <Link className='className="mr-5 hover:text-gray-900"' to={to}>
+    <Link className="mr-5 hover:text-gray-900" to={to}>
       {children}
     </Link>
   );

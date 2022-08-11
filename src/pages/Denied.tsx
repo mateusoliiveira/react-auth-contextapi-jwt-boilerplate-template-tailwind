@@ -1,5 +1,6 @@
 import AppContainer from '../components/fragments/inert/AppContainer';
 import AppLayout from '../components/fragments/inert/AppLayout';
+import DeniedSection from '../components/sections/DeniedSection';
 
 const Denied = () => {
   return (
@@ -8,7 +9,7 @@ const Denied = () => {
         title={'Não autorizado'}
         description={'você precisa estar autenticado para essa operação'}
       >
-        <div></div>
+        <DeniedSection />
       </AppLayout>
     </AppContainer>
   );

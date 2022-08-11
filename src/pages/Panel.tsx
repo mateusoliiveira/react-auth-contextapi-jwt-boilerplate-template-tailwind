@@ -1,5 +1,6 @@
 import AppContainer from '../components/fragments/inert/AppContainer';
 import AppLayout from '../components/fragments/inert/AppLayout';
+import PanelSection from '../components/sections/PanelSection';
 
 const Panel = () => {
   return (
@@ -8,7 +9,7 @@ const Panel = () => {
         title={'Painel de Controle'}
         description={'aqui estão suas ações principais'}
       >
-        <div></div>
+        <PanelSection />
       </AppLayout>
     </AppContainer>
   );

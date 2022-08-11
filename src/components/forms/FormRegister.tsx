@@ -1,8 +1,8 @@
 import { ChangeEvent, ReactElement, useState } from 'react';
+import { useAuth } from '../../context/AuthProvider/useAuth';
 import { AlertContent } from '../../interfaces/AlertContent';
-import { NewCredentials } from '../../interfaces/Credentials';
+import { NewAuthCredentials } from '../../interfaces/Credentials';
 import { APP_NEW_USER_MESSAGE } from '../../libs/constants';
-import { ApiServer } from '../../libs/services';
 import { alertClear } from '../../_utils';
 import AppButton from '../fragments/inert/AppButton';
 import AppForm from '../fragments/inert/AppForm';
@@ -16,7 +16,8 @@ import {
 } from './FormRegisterFragments';
 
 const FormRegister = (): ReactElement => {
-  const [credentials, setCredentials] = useState<NewCredentials>({
+  const auth = useAuth();
+  const [newCredentials, setNewCredentials] = useState<NewAuthCredentials>({
     email: '',
     name: '',
     password: '',
@@ -29,7 +30,7 @@ const FormRegister = (): ReactElement => {
 
   const submitRegister = async (): Promise<void> => {
     try {
-      const { status } = await ApiServer.post('/users', credentials);
+      const { status } = await auth.signUp(newCredentials);
       setAlert({ status, message: APP_NEW_USER_MESSAGE });
     } catch ({ response: { status, data } }: any) {
       setAlert({ status, message: data.validation.body.message });
@@ -46,21 +47,30 @@ const FormRegister = (): ReactElement => {
           {...{
             ...emailInputRegister,
             onChange: (event: ChangeEvent<HTMLInputElement>) =>
-              setCredentials({ ...credentials, email: event.target.value }),
+              setNewCredentials({
+                ...newCredentials,
+                email: event.target.value,
+              }),
           }}
         />
         <AppInput
           {...{
             ...nameInputRegister,
             onChange: (event: ChangeEvent<HTMLInputElement>) =>
-              setCredentials({ ...credentials, name: event.target.value }),
+              setNewCredentials({
+                ...newCredentials,
+                name: event.target.value,
+              }),
           }}
         />
         <AppInput
           {...{
             ...passwordInputRegister,
             onChange: (event: ChangeEvent<HTMLInputElement>) =>
-              setCredentials({ ...credentials, password: event.target.value }),
+              setNewCredentials({
+                ...newCredentials,
+                password: event.target.value,
+              }),
           }}
         />
         <AppButton

@@ -1,5 +1,9 @@
+import { AxiosResponse } from 'axios';
 import { createContext, useEffect, useState } from 'react';
-import { AuthCredentials } from '../../interfaces/Credentials';
+import {
+  AuthCredentials,
+  NewAuthCredentials,
+} from '../../interfaces/Credentials';
 import { Session } from '../../interfaces/Session';
 import { ApiServer } from '../../libs/services';
 import { IAuthProvider, IAuthContext } from './types';
@@ -30,6 +34,16 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
     }
   }
 
+  async function signUp(
+    newCredentials: NewAuthCredentials,
+  ): Promise<AxiosResponse> {
+    try {
+      return await ApiServer.post('/users', newCredentials);
+    } catch (error: any) {
+      throw error;
+    }
+  }
+
   async function signOut(): Promise<void> {
     setSessionContext(emptySession());
     expireSessionAndGrant();
@@ -40,6 +54,7 @@ export const AuthProvider = ({ children }: IAuthProvider) => {
       value={{
         ...sessionContext,
         signIn,
+        signUp,
         signOut,
       }}
     >

@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { AuthProvider } from './context/AuthProvider';
-import { CheckAuth } from './components/CheckAuth';
+import { CheckAuth } from './context/CheckAuth';
 import Index from './pages/Index';
 import Login from './pages/Login';
 import Panel from './pages/Panel';

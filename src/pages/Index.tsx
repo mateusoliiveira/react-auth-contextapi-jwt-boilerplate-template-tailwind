@@ -1,14 +1,15 @@
 import AppContainer from '../components/fragments/inert/AppContainer';
 import AppLayout from '../components/fragments/inert/AppLayout';
+import IndexSection from '../components/sections/IndexSection';
 
 const Index = () => {
   return (
     <AppContainer>
       <AppLayout
-        title={'Olá! Bem vindo ao nosso ERP'}
-        description={'realize suas vendas, cheque estoques e muito mais'}
+        title={'Olá! Bem vindo!'}
+        description={'sistema de autenticação react'}
       >
-        <div></div>
+        <IndexSection />
       </AppLayout>
     </AppContainer>
   );
